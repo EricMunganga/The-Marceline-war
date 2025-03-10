@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Marceline War</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #020024 0%, #090979 35%, #00d4ff 100%);
+            color: #fff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .content {
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
+            animation: slideIn 1.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated-mushroom, .animated-ant, .battle-scene {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            animation: moveAround 5s infinite alternate ease-in-out;
+        }
+        .animated-mushroom {
+            background: url('walking-mushroom.png') no-repeat center center/contain;
+            top: 60%;
+            left: 10%;
+        }
+        .animated-ant {
+            background: url('red-ant.png') no-repeat center center/contain;
+            top: 60%;
+            right: 10%;
+        }
+        .battle-scene {
+            background: url('battle-scene.png') no-repeat center center/contain;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes moveAround {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-20px); }
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: #fff;
+            background: #0072ff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0057cc;
+        }
+        .hidden-section {
+            display: none;
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
+            animation: slideIn 1.5s ease-in-out;
+        }
+    </style>
+    <script>
+        function toggleSection() {
+            var section = document.getElementById('extra-content');
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <h1>The Marceline War</h1>
+        <p>Mogo, a skilled soldier, crash-lands in the Marceline Jungle, an ancient and mysterious land filled with glowing fungal structures and strange creatures. 
+        He soon discovers the Mycoan, an intelligent race of humanoid mushrooms at war with the ruthless Ant Empire.</p>
+        <button class="btn" onclick="toggleSection()">Read More</button>
+    </div>
+    <div id="extra-content" class="hidden-section">
+        <p>As the war between the Mycoan and the Ant Empire rages on, Mogo must navigate treacherous alliances, powerful enemies, and the jungle's hidden secrets. 
+        With Zyra, a fierce warrior from his past, he faces gladiator-style battles, ancient forces, and a final conflict that will determine the fate of the jungle.</p>
+    </div>
+    <div class="animated-mushroom"></div>
+    <div class="animated-ant"></div>
+    <div class="battle-scene"></div>
+</body>
+</html>
