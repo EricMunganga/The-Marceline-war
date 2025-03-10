@@ -14,6 +14,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             height: 100vh;
             animation: fadeIn 2s ease-in-out;
         }
@@ -21,104 +22,97 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        .book-container {
-            perspective: 2000px;
-        }
-        .book {
-            width: 600px;
-            height: 400px;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateY(0deg);
-            transition: transform 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
-        }
-        .book.open {
-            transform: rotateY(-180deg) scale(1.05);
-            box-shadow: 0 20px 80px rgba(0, 255, 255, 0.8);
-        }
-        .cover, .content {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e1e1e 0%, #3a3a3a 100%);
+        .content {
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transform-origin: left;
-        }
-        .cover {
-            backface-visibility: hidden;
-            cursor: pointer;
-            transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
-        }
-        .cover:hover {
-            box-shadow: 0 20px 100px rgba(0, 255, 255, 1);
-            transform: scale(1.05);
-        }
-        .content {
-            transform: rotateY(180deg);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            animation: slideIn 1s ease-in-out;
-        }
-        .content.show {
-            display: flex;
+            animation: slideIn 1.5s ease-in-out;
         }
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .animated-mushroom, .animated-ant, .battle-scene {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            animation: moveAround 5s infinite alternate ease-in-out;
+        }
+        .animated-mushroom {
+            background: url('walking-mushroom.png') no-repeat center center/contain;
+            top: 60%;
+            left: 10%;
+        }
+        .animated-ant {
+            background: url('red-ant.png') no-repeat center center/contain;
+            top: 60%;
+            right: 10%;
+        }
+        .battle-scene {
+            background: url('battle-scene.png') no-repeat center center/contain;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes moveAround {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-20px); }
+        }
         .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            color: #fff;
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-            text-decoration: none;
-            font-size: 1.2rem;
-            border-radius: 30px;
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.5);
             margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: #fff;
+            background: #0072ff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
         }
         .btn:hover {
-            background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.8);
-            transform: scale(1.1);
+            background: #0057cc;
+        }
+        .hidden-section {
+            display: none;
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
+            animation: slideIn 1.5s ease-in-out;
         }
     </style>
-</head>
-<body>
-    <div class="book-container">
-        <div class="book" id="book">
-            <div class="cover" onclick="openBook()">
-                <h1>Click to Open</h1>
-            </div>
-            <div class="content" id="content">
-                <p>To read the book, please purchase access.</p>
-                <a href="#purchase" class="btn">Buy Now</a>
-                <a href="#" class="btn" onclick="closeBook()">Close</a>
-            </div>
-        </div>
-    </div>
-    
     <script>
-        function openBook() {
-            document.getElementById('book').classList.add('open');
-            setTimeout(() => {
-                document.getElementById('content').classList.add('show');
-            }, 1000);
-        }
-        
-        function closeBook() {
-            document.getElementById('book').classList.remove('open');
-            document.getElementById('content').classList.remove('show');
+        function toggleSection() {
+            var section = document.getElementById('extra-content');
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
         }
     </script>
+</head>
+<body>
+    <div class="content">
+        <h1>The Marceline War</h1>
+        <p>Mogo, a skilled soldier, crash-lands in the Marceline Jungle, an ancient and mysterious land filled with glowing fungal structures and strange creatures. 
+        He soon discovers the Mycoan, an intelligent race of humanoid mushrooms at war with the ruthless Ant Empire.</p>
+        <button class="btn" onclick="toggleSection()">Read More</button>
+    </div>
+    <div id="extra-content" class="hidden-section">
+        <p>As the war between the Mycoan and the Ant Empire rages on, Mogo must navigate treacherous alliances, powerful enemies, and the jungle's hidden secrets. 
+        With Zyra, a fierce warrior from his past, he faces gladiator-style battles, ancient forces, and a final conflict that will determine the fate of the jungle.</p>
+    </div>
+    <div class="animated-mushroom"></div>
+    <div class="animated-ant"></div>
+    <div class="battle-scene"></div>
 </body>
 </html>
